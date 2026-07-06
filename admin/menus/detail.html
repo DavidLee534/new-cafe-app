@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메뉴 상세 - 카페 앱 관리자</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="detail.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- 사이드바 / 네비게이션 -->
+    <aside class="admin-sidebar glass">
+      <div class="sidebar-brand">
+        <span class="brand-emoji">☕</span>
+        <h1 class="brand-title">Cafe Admin</h1>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="../index.html" class="menu-item">
+          <span class="menu-icon">📊</span> 대시보드
+        </a>
+        <a href="list.html" class="menu-item active">
+          <span class="menu-icon">📋</span> 메뉴 관리
+        </a>
+        <a href="../orders/list.html" class="menu-item">
+          <span class="menu-icon">🛍️</span> 주문 관리
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="../../index.html" class="btn btn-outline btn-sm">
+          <span>🏠</span> 고객 홈 바로가기
+        </a>
+      </div>
+    </aside>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="admin-main">
+      <header class="main-header glass">
+        <div class="header-info">
+          <h2>메뉴 상세 정보</h2>
+          <p>등록된 메뉴의 세부 내용을 조회합니다.</p>
+        </div>
+        <div class="header-actions">
+          <a href="list.html" class="btn btn-secondary">
+            <span>⬅️</span> 목록으로
+          </a>
+        </div>
+      </header>
+
+      <!-- 메뉴 상세 정보 카드 -->
+      <section class="detail-section glass" id="detailCard">
+        <!-- JS로 동적 생성 -->
+        <div class="loading">정보를 불러오는 중입니다...</div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 삭제 확인 커스텀 모달 -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3>🚨 메뉴 삭제</h3>
+        <button class="modal-close" onclick="closeDeleteModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>정말로 이 메뉴를 삭제하시겠습니까?</p>
+        <p class="modal-warn">삭제된 메뉴는 복구할 수 없습니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeDeleteModal()">취소</button>
+        <button class="btn btn-danger btn-sm" id="confirmDeleteBtn">삭제</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../js/data.js"></script>
+  <script src="../../js/utils.js"></script>
+  <script src="detail.js" defer></script>
+</body>
+</html>

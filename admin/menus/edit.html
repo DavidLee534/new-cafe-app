@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메뉴 수정 - 카페 앱 관리자</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="edit.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- 사이드바 / 네비게이션 -->
+    <aside class="admin-sidebar glass">
+      <div class="sidebar-brand">
+        <span class="brand-emoji">☕</span>
+        <h1 class="brand-title">Cafe Admin</h1>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="../index.html" class="menu-item">
+          <span class="menu-icon">📊</span> 대시보드
+        </a>
+        <a href="list.html" class="menu-item active">
+          <span class="menu-icon">📋</span> 메뉴 관리
+        </a>
+        <a href="../orders/list.html" class="menu-item">
+          <span class="menu-icon">🛍️</span> 주문 관리
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="../../index.html" class="btn btn-outline btn-sm">
+          <span>🏠</span> 고객 홈 바로가기
+        </a>
+      </div>
+    </aside>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="admin-main">
+      <header class="main-header glass">
+        <div class="header-info">
+          <h2>메뉴 수정</h2>
+          <p>기존 등록된 메뉴의 정보를 수정하고 변경사항을 저장합니다.</p>
+        </div>
+        <div class="header-actions">
+          <a href="list.html" class="btn btn-secondary" id="backBtn">
+            <span>⬅️</span> 취소
+          </a>
+        </div>
+      </header>
+
+      <!-- 메뉴 수정 폼 카드 -->
+      <section class="form-section glass" id="formWrapper">
+        <form id="menuForm" class="menu-form">
+          
+          <div class="form-group-grid">
+            <!-- 메뉴 이름 -->
+            <div class="form-group">
+              <label for="name">메뉴 이름 <span class="required">*</span></label>
+              <input type="text" id="name" name="name" required>
+              <span class="error-text" id="nameError"></span>
+            </div>
+
+            <!-- 카테고리 -->
+            <div class="form-group">
+              <label for="categoryId">카테고리 <span class="required">*</span></label>
+              <select id="categoryId" name="categoryId" required>
+                <option value="" disabled>카테고리를 선택하세요</option>
+                <!-- JS로 동적 로드 -->
+              </select>
+              <span class="error-text" id="categoryError"></span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="form-group">
+              <label for="price">판매 가격 (원) <span class="required">*</span></label>
+              <input type="number" id="price" name="price" min="0" step="100" required>
+              <span class="error-text" id="priceError"></span>
+            </div>
+
+            <!-- 이미지 URL -->
+            <div class="form-group">
+              <label for="image">이미지 URL</label>
+              <input type="url" id="image" name="image" placeholder="https://example.com/image.jpg (미입력 시 기본 이미지 적용)">
+              <span class="error-text" id="imageError"></span>
+            </div>
+          </div>
+
+          <!-- 메뉴 설명 -->
+          <div class="form-group">
+            <label for="description">메뉴 설명</label>
+            <textarea id="description" name="description" rows="4"></textarea>
+          </div>
+
+          <!-- 옵션 체크박스 그룹 -->
+          <div class="form-group">
+            <label>상품 상태 및 옵션 설정</label>
+            <div class="checkbox-group glass">
+              <label class="checkbox-label">
+                <input type="checkbox" id="hasTemperatureOption" name="hasTemperatureOption">
+                <span class="checkbox-custom"></span>
+                <span class="label-text">온도 옵션 제공 (ICE / HOT 구분 선택 가능)</span>
+              </label>
+              
+              <label class="checkbox-label">
+                <input type="checkbox" id="isPopular" name="isPopular">
+                <span class="checkbox-custom"></span>
+                <span class="label-text">인기 상품으로 등록 🔥 (메뉴 카드에 '인기' 뱃지 노출)</span>
+              </label>
+              
+              <label class="checkbox-label">
+                <input type="checkbox" id="isNew" name="isNew">
+                <span class="checkbox-custom"></span>
+                <span class="label-text">신규 상품으로 등록 ✨ (메뉴 카드에 '신규' 뱃지 노출)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 등록 / 취소 버튼 -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancelBtn">
+              취소
+            </button>
+            <button type="submit" class="btn btn-primary">
+              💾 수정 완료하기
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../js/data.js"></script>
+  <script src="../../js/utils.js"></script>
+  <script src="edit.js" defer></script>
+</body>
+</html>
