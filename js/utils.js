@@ -89,3 +89,78 @@ function getCartTotal() {
     0
   );
 }
+
+/* ---------------- 메뉴 데이터 (로컬 스토리지 연동) ---------------- */
+
+const MENUS_STORAGE_KEY = "cafe-app-menus";
+
+// 카테고리별 기본 이미지 매핑
+const DEFAULT_IMAGES = {
+  coffee: "https://images.unsplash.com/photo-1541167760496-1628856ab772?w=500&auto=format&fit=crop&q=60",
+  "non-coffee": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=500&auto=format&fit=crop&q=60",
+  tea: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=500&auto=format&fit=crop&q=60",
+  dessert: "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=500&auto=format&fit=crop&q=60"
+};
+
+function getStoredMenus() {
+  const raw = localStorage.getItem(MENUS_STORAGE_KEY);
+  if (!raw) {
+    // MENUS 상수는 js/data.js에 존재하므로 전역 변수로 참조
+    // 초기 로딩 시 비어있는 이미지를 카테고리 기본 이미지로 채워넣음
+    const initialMenus = MENUS.map(menu => ({
+      ...menu,
+      image: menu.image || DEFAULT_IMAGES[menu.categoryId] || ""
+    }));
+    localStorage.setItem(MENUS_STORAGE_KEY, JSON.stringify(initialMenus));
+    return initialMenus;
+  }
+  return JSON.parse(raw);
+}
+
+function saveMenus(menus) {
+  localStorage.setItem(MENUS_STORAGE_KEY, JSON.stringify(menus));
+}
+
+function getStoredMenuById(id) {
+  const menus = getStoredMenus();
+  return menus.find((m) => m.id === Number(id)) || null;
+}
+
+function createMenu(menuData) {
+  const menus = getStoredMenus();
+  const nextId = menus.length > 0 ? Math.max(...menus.map(m => m.id)) + 1 : 1;
+  const newMenu = {
+    id: nextId,
+    ...menuData,
+    price: Number(menuData.price),
+    image: menuData.image || DEFAULT_IMAGES[menuData.categoryId] || ""
+  };
+  menus.push(newMenu);
+  saveMenus(menus);
+  return newMenu;
+}
+
+function updateMenu(id, menuData) {
+  const menus = getStoredMenus();
+  const index = menus.findIndex(m => m.id === Number(id));
+  if (index !== -1) {
+    menus[index] = {
+      ...menus[index],
+      ...menuData,
+      id: Number(id),
+      price: Number(menuData.price),
+      image: menuData.image || DEFAULT_IMAGES[menuData.categoryId] || ""
+    };
+    saveMenus(menus);
+    return menus[index];
+  }
+  return null;
+}
+
+function deleteMenu(id) {
+  const menus = getStoredMenus();
+  const filtered = menus.filter(m => m.id !== Number(id));
+  saveMenus(filtered);
+  return filtered;
+}
+
