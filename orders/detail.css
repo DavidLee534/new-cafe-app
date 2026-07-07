@@ -1,0 +1,108 @@
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  height: var(--header-height);
+  padding: 0 var(--spacing-md);
+  border-radius: 0;
+}
+
+.page-header .back-link {
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
+}
+
+.page-header h1 {
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+}
+
+.detail-container {
+  max-width: var(--max-width-mobile);
+  margin: 0 auto;
+  padding: var(--spacing-md);
+}
+
+.detail-summary {
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+.detail-summary .order-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+}
+
+.detail-summary .order-date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.status-badge {
+  padding: 2px var(--spacing-sm);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-inverse);
+  background: var(--color-primary);
+}
+
+.status-badge.cancelled {
+  background: var(--color-text-light);
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+}
+
+.item-row .item-name {
+  font-size: var(--font-size-md);
+  margin-bottom: 2px;
+}
+
+.item-row .item-option {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-light);
+}
+
+.item-row .item-price {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.total-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+}
+
+.total-bar .label {
+  font-size: var(--font-size-md);
+  color: var(--color-text-light);
+}
+
+.total-bar .amount {
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--color-text-light);
+  padding: var(--spacing-2xl) 0;
+}

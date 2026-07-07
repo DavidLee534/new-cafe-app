@@ -122,6 +122,35 @@ const MENUS = [
   },
 ];
 
+const ORDERS = [
+  {
+    id: 1001,
+    orderDate: "2026-07-05T14:32:00",
+    status: "주문완료",
+    items: [
+      { menuId: 1, name: "아메리카노", price: 4500, temperature: "ICE", quantity: 2 },
+      { menuId: 9, name: "크로플", price: 6500, temperature: null, quantity: 1 },
+    ],
+  },
+  {
+    id: 1002,
+    orderDate: "2026-07-03T09:12:00",
+    status: "주문완료",
+    items: [
+      { menuId: 2, name: "카페라떼", price: 5000, temperature: "HOT", quantity: 1 },
+    ],
+  },
+  {
+    id: 1003,
+    orderDate: "2026-06-28T18:47:00",
+    status: "주문취소",
+    items: [
+      { menuId: 6, name: "딸기스무디", price: 6000, temperature: null, quantity: 1 },
+      { menuId: 10, name: "치즈케이크", price: 7000, temperature: null, quantity: 1 },
+    ],
+  },
+];
+
 function getCategoryById(categoryId) {
   return CATEGORIES.find((category) => category.id === categoryId) || null;
 }
@@ -135,4 +164,21 @@ function getMenusByCategory(categoryId) {
     return MENUS;
   }
   return MENUS.filter((menu) => menu.categoryId === categoryId);
+}
+
+function getOrders() {
+  return [...ORDERS].sort(
+    (a, b) => new Date(b.orderDate) - new Date(a.orderDate)
+  );
+}
+
+function getOrderById(orderId) {
+  return ORDERS.find((order) => order.id === Number(orderId)) || null;
+}
+
+function getOrderTotal(order) {
+  return order.items.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 }
