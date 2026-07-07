@@ -164,3 +164,46 @@ function deleteMenu(id) {
   return filtered;
 }
 
+function checkoutCart() {
+  const cart = getCart();
+  if (cart.length === 0) return null;
+
+  const rawOrders = localStorage.getItem("cafe-app-orders");
+  // ORDERS is from data.js, which is loaded before utils.js or list.js
+  const storedOrders = rawOrders ? JSON.parse(rawOrders) : (typeof ORDERS !== "undefined" ? ORDERS : []);
+  const nextId = storedOrders.length > 0 ? Math.max(...storedOrders.map(o => o.id)) + 1 : 1001;
+
+  const newOrder = {
+    id: nextId,
+    orderDate: new Date().toISOString(),
+    status: "주문완료",
+    items: [...cart]
+  };
+
+  storedOrders.push(newOrder);
+  localStorage.setItem("cafe-app-orders", JSON.stringify(storedOrders));
+  clearCart();
+  updateCartBadge();
+  return newOrder;
+}
+
+function updateCartBadge() {
+  const badgeEl = document.getElementById("cart-badge");
+  if (badgeEl) {
+    const count = getCartCount();
+    badgeEl.textContent = count;
+    badgeEl.setAttribute("data-count", count);
+    if (count === 0) {
+      badgeEl.style.display = "none";
+    } else {
+      badgeEl.style.display = "flex";
+    }
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", updateCartBadge);
+} else {
+  updateCartBadge();
+}
+
