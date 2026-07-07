@@ -85,6 +85,10 @@ function bindBasketEvents() {
         (item) => item.menuId === menuId && item.temperature === temperature
       );
       if (current) {
+        if (current.quantity >= 10) {
+          alert("한 메뉴당 최대 10잔까지만 주문 가능합니다.");
+          return;
+        }
         updateCartQuantity(menuId, temperature, current.quantity + 1);
         renderBasket();
       }
