@@ -1,27 +1,32 @@
 let activeCategoryId = "all";
 
-function renderCategoryTabs() {
-  const tabsEl = document.getElementById("category-tabs");
+function renderCategoryNav(containerId, tabClass) {
+  const containerEl = document.getElementById(containerId);
   const allTabs = [{ id: "all", name: "전체" }, ...CATEGORIES];
 
-  tabsEl.innerHTML = allTabs
+  containerEl.innerHTML = allTabs
     .map(
       (category) => `
         <button
-          class="category-tab ${category.id === activeCategoryId ? "active" : ""}"
+          class="${tabClass} ${category.id === activeCategoryId ? "active" : ""}"
           data-category-id="${category.id}"
         >${category.name}</button>
       `
     )
     .join("");
 
-  tabsEl.querySelectorAll(".category-tab").forEach((tab) => {
+  containerEl.querySelectorAll(`.${tabClass}`).forEach((tab) => {
     tab.addEventListener("click", () => {
       activeCategoryId = tab.dataset.categoryId;
-      renderCategoryTabs();
+      renderCategoryNavs();
       renderMenuGrid();
     });
   });
+}
+
+function renderCategoryNavs() {
+  renderCategoryNav("category-tabs", "category-tab");
+  renderCategoryNav("category-sidebar", "sidebar-category");
 }
 
 function renderMenuGrid() {
@@ -73,5 +78,5 @@ function renderMenuGrid() {
   });
 }
 
-renderCategoryTabs();
+renderCategoryNavs();
 renderMenuGrid();
