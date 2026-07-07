@@ -31,6 +31,8 @@ function renderBasket() {
         ? `<span class="item-option ${item.temperature.toLowerCase()}">${item.temperature}</span>`
         : "";
 
+      const subtotal = item.price * item.quantity;
+
       return `
         <article class="basket-item glass" data-menu-id="${item.menuId}" data-temperature="${item.temperature || ""}">
           <div class="item-image-container">
@@ -39,11 +41,16 @@ function renderBasket() {
           <div class="item-details">
             <p class="item-name">${item.name}</p>
             ${optionBadge}
-            <p class="item-price">${formatPrice(item.price)}</p>
-            <div class="quantity-control">
-              <button class="btn-decrease" aria-label="수량 감소">-</button>
-              <span class="count">${item.quantity}</span>
-              <button class="btn-increase" aria-label="수량 증가">+</button>
+            <div class="item-meta">
+              <div class="quantity-control">
+                <button class="btn-decrease" aria-label="수량 감소">-</button>
+                <span class="count">${item.quantity}</span>
+                <button class="btn-increase" aria-label="수량 증가">+</button>
+              </div>
+              <div class="price-container">
+                <span class="unit-price">개당 ${formatPrice(item.price)}</span>
+                <span class="subtotal-price">${formatPrice(subtotal)}</span>
+              </div>
             </div>
           </div>
           <button class="btn-remove" aria-label="품목 삭제">✕</button>
