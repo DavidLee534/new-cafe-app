@@ -1,10 +1,3 @@
-const CATEGORY_ICONS = {
-  coffee: "☕",
-  "non-coffee": "🥤",
-  tea: "🍵",
-  dessert: "🍰",
-};
-
 function getMenuIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("id");
@@ -35,8 +28,11 @@ function renderDetail() {
   container.innerHTML = `
     <div class="detail-container">
       <div class="detail-image-container">
-        <div class="image-fallback">${CATEGORY_ICONS[menu.categoryId] || "☕"}</div>
-        ${menu.image ? `<img src="${menu.image}" alt="${menu.name}" onerror="this.remove()">` : ""}
+        <img
+          src="${menu.image}"
+          alt="${menu.name}"
+          onerror="this.src='https://images.unsplash.com/photo-1541167760496-1628856ab772?w=500&auto=format&fit=crop&q=60'"
+        >
         <span class="menu-category-tag">${category ? category.name : ""}</span>
       </div>
       <section class="detail-info glass">
