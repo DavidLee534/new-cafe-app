@@ -69,12 +69,14 @@ function renderMenuDetail() {
 
   detailCard.innerHTML = `
     <div class="detail-image-box">
-      <div class="detail-badges">${badgesHtml}</div>
       <img src="${currentMenu.image}" alt="${currentMenu.name}" onerror="this.src='https://images.unsplash.com/photo-1541167760496-1628856ab772?w=500&auto=format&fit=crop&q=60'">
     </div>
     <div class="detail-info-box">
       <div class="detail-header">
-        <span class="detail-category">${categoryName}</span>
+        <div class="detail-header-tags">
+          <span class="detail-category">${categoryName}</span>
+          <div class="detail-badges-inline">${badgesHtml}</div>
+        </div>
         <h3 class="detail-name">${currentMenu.name}</h3>
       </div>
       
