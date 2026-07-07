@@ -62,10 +62,23 @@
           <input type="text" id="searchInput" placeholder="메뉴 이름을 검색하세요...">
           <span class="search-icon">🔍</span>
         </div>
+        <div class="view-toggle" id="viewToggle">
+          <button class="toggle-btn" data-view="grid" title="그리드 뷰">📱 그리드</button>
+          <button class="toggle-btn" data-view="list" title="리스트 뷰">📝 리스트</button>
+        </div>
       </section>
 
       <!-- 메뉴 목록 그리드 -->
       <section class="menu-grid-section">
+        <div class="list-header" id="listHeader">
+          <div class="col-img">이미지</div>
+          <div class="col-info">
+            <div class="col-name">메뉴명</div>
+            <div class="col-category">카테고리</div>
+            <div class="col-meta">가격 / 옵션</div>
+          </div>
+          <div class="col-actions">관리</div>
+        </div>
         <div class="menu-grid" id="menuGrid">
           <!-- JS로 동적 생성 -->
         </div>
