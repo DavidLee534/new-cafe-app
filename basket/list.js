@@ -4,20 +4,22 @@ function renderBasket() {
   const checkoutEl = document.getElementById("checkout-section");
   const totalCountEl = document.getElementById("total-count");
   const totalPriceEl = document.getElementById("total-price");
+  const basketTitleEl = document.getElementById("basket-title");
+  const contentCardEl = document.getElementById("basket-content-card");
 
   const cart = getCart();
 
+  if (basketTitleEl) {
+    basketTitleEl.textContent = `장바구니 (${cart.length})`;
+  }
+
   if (cart.length === 0) {
-    listEl.style.display = "none";
-    checkoutEl.style.display = "none";
+    if (contentCardEl) contentCardEl.style.display = "none";
     emptyEl.style.display = "flex";
     return;
   }
 
-  listEl.style.display = "flex";
-  listEl.style.flexDirection = "column";
-  listEl.style.gap = "var(--spacing-md)";
-  checkoutEl.style.display = "flex";
+  if (contentCardEl) contentCardEl.style.display = "";
   emptyEl.style.display = "none";
 
   listEl.innerHTML = cart
@@ -39,8 +41,10 @@ function renderBasket() {
             <img src="${imageSrc}" alt="${item.name}" onerror="this.src='${defaultImage}'">
           </div>
           <div class="item-details">
-            <p class="item-name">${item.name}</p>
-            ${optionBadge}
+            <div class="item-title-row">
+              <p class="item-name">${item.name}</p>
+              ${optionBadge}
+            </div>
             <div class="item-meta">
               <div class="quantity-control">
                 <button class="btn-decrease" aria-label="수량 감소">-</button>

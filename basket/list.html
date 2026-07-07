@@ -15,18 +15,30 @@
     <a href="../menus/list.html" class="icon-btn back-link" aria-label="메뉴로">
       <span aria-hidden="true">←</span>
     </a>
-    <div class="header-text">
-      <h1>장바구니</h1>
-      <p>담은 메뉴들을 확인하고 주문하세요</p>
-    </div>
-    <div class="header-spacer"></div>
+    <h1 id="basket-title">장바구니</h1>
   </header>
 
   <main class="basket-container">
-    <!-- 장바구니 품목 목록 -->
-    <section class="basket-list" id="basket-list">
-      <!-- JS로 동적 생성 -->
-    </section>
+    <!-- 장바구니 카드형 묶음 박스 -->
+    <div class="basket-content-card glass" id="basket-content-card">
+      <!-- 장바구니 품목 목록 -->
+      <section class="basket-list" id="basket-list">
+        <!-- JS로 동적 생성 -->
+      </section>
+
+      <!-- 결제 금액 정보 & 주문하기 버튼 -->
+      <section class="checkout-section" id="checkout-section">
+        <div class="summary-row">
+          <span>총 수량</span>
+          <span id="total-count">0개</span>
+        </div>
+        <div class="summary-row total">
+          <span>결제 예정 금액</span>
+          <span id="total-price">0원</span>
+        </div>
+        <button class="btn-order" id="btn-order">주문하기</button>
+      </section>
+    </div>
 
     <!-- 빈 화면 표시 -->
     <div class="empty-state" id="empty-state" style="display: none;">
@@ -35,19 +47,6 @@
       <p>맛있는 음료와 디저트를 담아보세요!</p>
       <a href="../menus/list.html" class="btn-shop">메뉴 보러 가기</a>
     </div>
-
-    <!-- 결제 금액 정보 & 주문하기 버튼 -->
-    <section class="checkout-section glass" id="checkout-section">
-      <div class="summary-row">
-        <span>총 수량</span>
-        <span id="total-count">0개</span>
-      </div>
-      <div class="summary-row total">
-        <span>결제 예정 금액</span>
-        <span id="total-price">0원</span>
-      </div>
-      <button class="btn-order" id="btn-order">주문하기</button>
-    </section>
   </main>
 
   <!-- 주문 성공 모달 -->
