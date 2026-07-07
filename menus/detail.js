@@ -25,12 +25,22 @@ function renderDetail() {
     return;
   }
 
+  const category = getCategoryById(menu.categoryId);
   const totalPrice = menu.price * state.quantity;
+  const badgesHtml = `
+    ${menu.isPopular ? `<span class="badge badge-popular">인기</span>` : ""}
+    ${menu.isNew ? `<span class="badge badge-new">신규</span>` : ""}
+  `;
 
   container.innerHTML = `
     <div class="detail-container">
-      <div class="detail-thumb">${CATEGORY_ICONS[menu.categoryId] || "☕"}</div>
+      <div class="detail-image-container">
+        <div class="image-fallback">${CATEGORY_ICONS[menu.categoryId] || "☕"}</div>
+        ${menu.image ? `<img src="${menu.image}" alt="${menu.name}" onerror="this.remove()">` : ""}
+        <span class="menu-category-tag">${category ? category.name : ""}</span>
+      </div>
       <section class="detail-info glass">
+        <div class="badges">${badgesHtml}</div>
         <p class="name">${menu.name}</p>
         <p class="price">${formatPrice(menu.price)}</p>
         <p class="description">${menu.description}</p>

@@ -41,16 +41,32 @@ function renderMenuGrid() {
   }
 
   gridEl.innerHTML = menus
-    .map(
-      (menu) => `
+    .map((menu) => {
+      const category = getCategoryById(menu.categoryId);
+      const badgesHtml = `
+        ${menu.isPopular ? `<span class="badge badge-popular">인기</span>` : ""}
+        ${menu.isNew ? `<span class="badge badge-new">신규</span>` : ""}
+      `;
+
+      return `
         <article class="menu-card glass" data-menu-id="${menu.id}">
-          ${menu.isNew ? `<span class="badge">NEW</span>` : ""}
-          <div class="thumb">${CATEGORY_ICONS[menu.categoryId] || "☕"}</div>
-          <p class="name">${menu.name}</p>
-          <p class="price">${formatPrice(menu.price)}</p>
+          <div class="menu-image-container">
+            <div class="image-fallback">${CATEGORY_ICONS[menu.categoryId] || "☕"}</div>
+            ${menu.image ? `<img src="${menu.image}" alt="${menu.name}" loading="lazy" onerror="this.remove()">` : ""}
+            <div class="menu-badges">${badgesHtml}</div>
+            <span class="menu-category-tag">${category ? category.name : ""}</span>
+          </div>
+          <div class="menu-info">
+            <p class="name">${menu.name}</p>
+            <p class="desc">${menu.description}</p>
+            <div class="menu-meta">
+              <span class="price">${formatPrice(menu.price)}</span>
+              ${menu.hasTemperatureOption ? `<span class="option-tag">ICE/HOT</span>` : ""}
+            </div>
+          </div>
         </article>
-      `
-    )
+      `;
+    })
     .join("");
 
   gridEl.querySelectorAll(".menu-card").forEach((card) => {
