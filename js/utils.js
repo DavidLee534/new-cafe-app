@@ -38,15 +38,33 @@ function addToCart(item) {
   );
 
   if (existing) {
-    existing.quantity += item.quantity || 1;
+    const newQuantity = existing.quantity + (item.quantity || 1);
+    if (newQuantity > 10) {
+      existing.quantity = 10;
+      alert("장바구니에는 메뉴 당 최대 10잔까지만 담을 수 있습니다.");
+    } else {
+      existing.quantity = newQuantity;
+    }
   } else {
-    cart.push({
-      menuId: item.menuId,
-      name: item.name,
-      price: item.price,
-      temperature: item.temperature || null,
-      quantity: item.quantity || 1,
-    });
+    const quantity = item.quantity || 1;
+    if (quantity > 10) {
+      alert("한 메뉴당 최대 10잔까지만 주문 가능합니다.");
+      cart.push({
+        menuId: item.menuId,
+        name: item.name,
+        price: item.price,
+        temperature: item.temperature || null,
+        quantity: 10,
+      });
+    } else {
+      cart.push({
+        menuId: item.menuId,
+        name: item.name,
+        price: item.price,
+        temperature: item.temperature || null,
+        quantity: quantity,
+      });
+    }
   }
 
   saveCart(cart);
@@ -68,7 +86,12 @@ function updateCartQuantity(menuId, temperature, quantity) {
   );
 
   if (target) {
-    target.quantity = Math.max(1, quantity);
+    if (quantity > 10) {
+      target.quantity = 10;
+      alert("한 메뉴당 최대 10잔까지만 주문 가능합니다.");
+    } else {
+      target.quantity = Math.max(1, quantity);
+    }
     saveCart(cart);
   }
 

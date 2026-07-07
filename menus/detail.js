@@ -95,6 +95,10 @@ function bindDetailEvents() {
 
   if (increaseBtn) {
     increaseBtn.addEventListener("click", () => {
+      if (state.quantity >= 10) {
+        alert("한 메뉴당 최대 10잔까지만 주문 가능합니다.");
+        return;
+      }
       state.quantity += 1;
       renderDetail();
     });
