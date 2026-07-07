@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>장바구니 - 카페 앱</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="list.css" />
+</head>
+<body>
+  <header class="page-header glass">
+    <div class="header-left">
+      <a href="../menus/list.html" class="back-link" aria-label="메뉴로">←</a>
+      <div class="header-text">
+        <h1>장바구니</h1>
+        <p>담은 메뉴들을 확인하고 주문하세요</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="basket-container">
+    <!-- 장바구니 품목 목록 -->
+    <section class="basket-list" id="basket-list">
+      <!-- JS로 동적 생성 -->
+    </section>
+
+    <!-- 빈 화면 표시 -->
+    <div class="empty-state" id="empty-state" style="display: none;">
+      <div class="empty-icon">🛒</div>
+      <h3>장바구니가 비어 있습니다</h3>
+      <p>맛있는 음료와 디저트를 담아보세요!</p>
+      <a href="../menus/list.html" class="btn-shop">메뉴 보러 가기</a>
+    </div>
+
+    <!-- 결제 금액 정보 & 주문하기 버튼 -->
+    <section class="checkout-section glass" id="checkout-section">
+      <div class="summary-row">
+        <span>총 수량</span>
+        <span id="total-count">0개</span>
+      </div>
+      <div class="summary-row total">
+        <span>결제 예정 금액</span>
+        <span id="total-price">0원</span>
+      </div>
+      <button class="btn-order" id="btn-order">주문하기</button>
+    </section>
+  </main>
+
+  <!-- 주문 성공 모달 -->
+  <div class="modal-overlay" id="order-success-modal" style="display: none;">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3>🎉 주문 완료</h3>
+      </div>
+      <div class="modal-body">
+        <p>주문이 성공적으로 접수되었습니다!</p>
+        <p class="modal-desc">따뜻한 음료가 준비되는 동안 잠시만 기다려주세요.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal-close" id="btn-modal-close">주문 내역 보기</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="list.js"></script>
+</body>
+</html>

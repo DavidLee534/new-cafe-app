@@ -151,23 +151,36 @@ const ORDERS = [
   },
 ];
 
+function getStoredMenusRaw() {
+  const raw = localStorage.getItem("cafe-app-menus");
+  return raw ? JSON.parse(raw) : MENUS;
+}
+
 function getCategoryById(categoryId) {
   return CATEGORIES.find((category) => category.id === categoryId) || null;
 }
 
 function getMenuById(menuId) {
-  return MENUS.find((menu) => menu.id === Number(menuId)) || null;
+  const menus = getStoredMenusRaw();
+  return menus.find((menu) => menu.id === Number(menuId)) || null;
 }
 
 function getMenusByCategory(categoryId) {
+  const menus = getStoredMenusRaw();
   if (!categoryId || categoryId === "all") {
-    return MENUS;
+    return menus;
   }
-  return MENUS.filter((menu) => menu.categoryId === categoryId);
+  return menus.filter((menu) => menu.categoryId === categoryId);
+}
+
+function getStoredOrdersRaw() {
+  const raw = localStorage.getItem("cafe-app-orders");
+  return raw ? JSON.parse(raw) : ORDERS;
 }
 
 function getOrders() {
-  return [...ORDERS].sort(
+  const orders = getStoredOrdersRaw();
+  return [...orders].sort(
     (a, b) => new Date(b.orderDate) - new Date(a.orderDate)
   );
 }

@@ -12,11 +12,17 @@
 </head>
 <body>
   <header class="page-header glass">
-    <a href="../index.html" class="back-link" aria-label="메인으로">←</a>
-    <div class="header-text">
-      <h1>메뉴</h1>
-      <p>오늘 마시고 싶은 메뉴를 골라보세요</p>
+    <div class="header-left">
+      <a href="../index.html" class="back-link" aria-label="메인으로">←</a>
+      <div class="header-text">
+        <h1>메뉴</h1>
+        <p>오늘 마시고 싶은 메뉴를 골라보세요</p>
+      </div>
     </div>
+    <a href="../basket/list.html" class="header-cart" aria-label="장바구니">
+      <span class="cart-icon">🛒</span>
+      <span class="cart-badge" id="cart-badge" data-count="0">0</span>
+    </a>
   </header>
 
   <nav class="category-tabs" id="category-tabs"></nav>
