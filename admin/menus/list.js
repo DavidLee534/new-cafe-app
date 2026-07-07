@@ -3,6 +3,7 @@ let currentMenus = [];
 let activeCategory = "all";
 let searchKeyword = "";
 let deleteTargetId = null;
+let currentViewMode = "grid";
 
 // DOM 요소
 const menuGrid = document.getElementById("menuGrid");
@@ -12,6 +13,7 @@ const searchInput = document.getElementById("searchInput");
 const deleteModal = document.getElementById("deleteModal");
 const deleteTargetNameSpan = document.getElementById("deleteTargetName");
 const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+const viewToggle = document.getElementById("viewToggle");
 
 // 초기화 실행
 document.addEventListener("DOMContentLoaded", () => {
@@ -19,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   currentMenus = getStoredMenus();
   
   initCategoryFilters();
+  initViewMode();
   renderMenus();
   setupEventListeners();
 });
@@ -66,6 +69,50 @@ function setupEventListeners() {
       renderMenus();
     }
   });
+
+  // 뷰 모드 토글 클릭
+  if (viewToggle) {
+    viewToggle.addEventListener("click", (e) => {
+      const btn = e.target.closest(".toggle-btn");
+      if (btn) {
+        currentViewMode = btn.getAttribute("data-view");
+        localStorage.setItem("admin-menu-view-mode", currentViewMode);
+        updateViewToggleUI();
+        applyViewModeClass();
+      }
+    });
+  }
+}
+
+// 뷰 모드 초기화 및 헬퍼 함수
+function initViewMode() {
+  currentViewMode = localStorage.getItem("admin-menu-view-mode") || "grid";
+  updateViewToggleUI();
+  applyViewModeClass();
+}
+
+function updateViewToggleUI() {
+  if (!viewToggle) return;
+  const buttons = viewToggle.querySelectorAll(".toggle-btn");
+  buttons.forEach(btn => {
+    if (btn.getAttribute("data-view") === currentViewMode) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
+}
+
+function applyViewModeClass() {
+  if (!menuGrid) return;
+  const section = document.querySelector(".menu-grid-section");
+  if (currentViewMode === "list") {
+    menuGrid.classList.add("view-list");
+    if (section) section.classList.add("view-list-mode");
+  } else {
+    menuGrid.classList.remove("view-list");
+    if (section) section.classList.remove("view-list-mode");
+  }
 }
 
 // 메뉴 목록 렌더링
@@ -86,7 +133,7 @@ function renderMenus() {
     return;
   }
 
-  menuGrid.style.display = "grid";
+  menuGrid.style.display = "";
   emptyState.style.display = "none";
 
   filteredMenus.forEach(menu => {
@@ -108,16 +155,17 @@ function renderMenus() {
 
     card.innerHTML = `
       <div class="menu-image-container">
-        <div class="menu-badges">${badgesHtml}</div>
         <img src="${menu.image}" alt="${menu.name}" onerror="this.src='https://images.unsplash.com/photo-1541167760496-1628856ab772?w=500&auto=format&fit=crop&q=60'">
-        <span class="menu-category-tag">${categoryName}</span>
       </div>
       <div class="menu-info">
+        <div class="menu-info-header">
+          <span class="menu-category-tag">${categoryName}</span>
+          <div class="menu-badges">${badgesHtml}</div>
+        </div>
         <h3 class="menu-name">${menu.name}</h3>
-        <p class="menu-desc">${menu.description || "설명이 등록되지 않았습니다."}</p>
         <div class="menu-meta">
           <span class="menu-price">${formatPrice(menu.price)}</span>
-          <span class="menu-options">${menu.hasTemperatureOption ? "ICE/HOT 선택" : "온도 고정"}</span>
+          <span class="menu-options">${menu.hasTemperatureOption ? "ICE/HOT" : "단일온도"}</span>
         </div>
       </div>
       <div class="menu-actions">
