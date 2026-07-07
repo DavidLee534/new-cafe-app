@@ -6,6 +6,10 @@ function buildOrderSummary(order) {
     : firstItem.name;
 }
 
+function getOrderItemQuantity(order) {
+  return order.items.reduce((total, item) => total + item.quantity, 0);
+}
+
 function renderOrderList() {
   const listEl = document.getElementById("order-list");
   const orders = getOrders();
@@ -16,18 +20,24 @@ function renderOrderList() {
   }
 
   listEl.innerHTML = orders
-    .map(
-      (order) => `
-        <article class="order-card glass" data-order-id="${order.id}">
-          <div class="order-top">
+    .map((order) => {
+      const isCancelled = order.status === "주문취소";
+
+      return `
+        <article class="order-card glass">
+          <div class="order-card-header">
             <span class="order-date">${formatDate(order.orderDate)}</span>
-            <span class="status-badge ${order.status === "주문취소" ? "cancelled" : ""}">${order.status}</span>
+            <span class="status-badge ${isCancelled ? "cancelled" : ""}">${order.status}</span>
           </div>
+          <p class="order-id">주문번호 #${order.id}</p>
           <p class="order-summary">${buildOrderSummary(order)}</p>
-          <p class="order-total">${formatPrice(getOrderTotal(order))}</p>
+          <div class="order-footer">
+            <span class="item-count">${order.items.length}종 ${getOrderItemQuantity(order)}개</span>
+            <span class="order-total">${formatPrice(getOrderTotal(order))}</span>
+          </div>
         </article>
-      `
-    )
+      `;
+    })
     .join("");
 }
 
