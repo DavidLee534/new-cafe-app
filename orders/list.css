@@ -1,0 +1,80 @@
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  height: var(--header-height);
+  padding: 0 var(--spacing-md);
+  border-radius: 0;
+}
+
+.page-header .back-link {
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
+}
+
+.page-header h1 {
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  max-width: var(--max-width-mobile);
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .order-list {
+    max-width: var(--max-width-desktop);
+  }
+}
+
+.order-card {
+  padding: var(--spacing-md);
+}
+
+.order-card .order-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+}
+
+.order-card .order-date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.order-card .status-badge {
+  padding: 2px var(--spacing-sm);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-inverse);
+  background: var(--color-primary);
+}
+
+.order-card .status-badge.cancelled {
+  background: var(--color-text-light);
+}
+
+.order-card .order-summary {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-xs);
+}
+
+.order-card .order-total {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--color-text-light);
+  padding: var(--spacing-2xl) 0;
+}

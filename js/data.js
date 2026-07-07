@@ -16,7 +16,7 @@ const MENUS = [
     name: "아메리카노",
     price: 4500,
     description: "깊고 진한 에스프레소에 물을 더한 클래식 커피",
-    image: "",
+    image: "https://images.unsplash.com/photo-1541167760496-1628856ab772?w=500&auto=format&fit=crop&q=60",
     hasTemperatureOption: true,
     isPopular: true,
     isNew: false,
@@ -27,7 +27,7 @@ const MENUS = [
     name: "카페라떼",
     price: 5000,
     description: "부드러운 우유와 에스프레소의 조화",
-    image: "",
+    image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500&auto=format&fit=crop&q=60",
     hasTemperatureOption: true,
     isPopular: true,
     isNew: false,
@@ -38,7 +38,7 @@ const MENUS = [
     name: "바닐라라떼",
     price: 5500,
     description: "달콤한 바닐라 시럽이 더해진 라떼",
-    image: "",
+    image: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=500&auto=format&fit=crop&q=60",
     hasTemperatureOption: true,
     isPopular: false,
     isNew: false,
@@ -49,7 +49,7 @@ const MENUS = [
     name: "카푸치노",
     price: 5000,
     description: "풍성한 우유 거품이 매력적인 커피",
-    image: "",
+    image: "https://images.unsplash.com/photo-1534778101976-62847782c213?w=500&auto=format&fit=crop&q=60",
     hasTemperatureOption: true,
     isPopular: false,
     isNew: false,
@@ -60,7 +60,7 @@ const MENUS = [
     name: "초콜릿라떼",
     price: 5500,
     description: "진한 초콜릿과 우유의 달콤한 만남",
-    image: "",
+    image: "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=500&auto=format&fit=crop&q=60",
     hasTemperatureOption: true,
     isPopular: false,
     isNew: false,
@@ -71,7 +71,7 @@ const MENUS = [
     name: "딸기스무디",
     price: 6000,
     description: "상큼한 딸기로 만든 시원한 스무디",
-    image: "",
+    image: "https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=500&auto=format&fit=crop&q=60",
     hasTemperatureOption: false,
     isPopular: true,
     isNew: true,
@@ -82,7 +82,7 @@ const MENUS = [
     name: "얼그레이",
     price: 4800,
     description: "은은한 베르가못 향의 홍차",
-    image: "",
+    image: "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=500&auto=format&fit=crop&q=60",
     hasTemperatureOption: true,
     isPopular: false,
     isNew: false,
@@ -93,7 +93,7 @@ const MENUS = [
     name: "캐모마일",
     price: 4800,
     description: "편안한 휴식을 위한 허브티",
-    image: "",
+    image: "https://images.unsplash.com/photo-1523920290228-4f321a939b4c?w=500&auto=format&fit=crop&q=60",
     hasTemperatureOption: true,
     isPopular: false,
     isNew: false,
@@ -104,7 +104,7 @@ const MENUS = [
     name: "크로플",
     price: 6500,
     description: "바삭하고 촉촉한 크로플",
-    image: "",
+    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&auto=format&fit=crop&q=60",
     hasTemperatureOption: false,
     isPopular: true,
     isNew: false,
@@ -115,10 +115,39 @@ const MENUS = [
     name: "치즈케이크",
     price: 7000,
     description: "진하고 부드러운 뉴욕 치즈케이크",
-    image: "",
+    image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&auto=format&fit=crop&q=60",
     hasTemperatureOption: false,
     isPopular: false,
     isNew: true,
+  },
+];
+
+const ORDERS = [
+  {
+    id: 1001,
+    orderDate: "2026-07-05T14:32:00",
+    status: "주문완료",
+    items: [
+      { menuId: 1, name: "아메리카노", price: 4500, temperature: "ICE", quantity: 2 },
+      { menuId: 9, name: "크로플", price: 6500, temperature: null, quantity: 1 },
+    ],
+  },
+  {
+    id: 1002,
+    orderDate: "2026-07-03T09:12:00",
+    status: "주문완료",
+    items: [
+      { menuId: 2, name: "카페라떼", price: 5000, temperature: "HOT", quantity: 1 },
+    ],
+  },
+  {
+    id: 1003,
+    orderDate: "2026-06-28T18:47:00",
+    status: "주문취소",
+    items: [
+      { menuId: 6, name: "딸기스무디", price: 6000, temperature: null, quantity: 1 },
+      { menuId: 10, name: "치즈케이크", price: 7000, temperature: null, quantity: 1 },
+    ],
   },
 ];
 
@@ -135,4 +164,17 @@ function getMenusByCategory(categoryId) {
     return MENUS;
   }
   return MENUS.filter((menu) => menu.categoryId === categoryId);
+}
+
+function getOrders() {
+  return [...ORDERS].sort(
+    (a, b) => new Date(b.orderDate) - new Date(a.orderDate)
+  );
+}
+
+function getOrderTotal(order) {
+  return order.items.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 }

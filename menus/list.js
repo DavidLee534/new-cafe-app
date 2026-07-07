@@ -1,10 +1,3 @@
-const CATEGORY_ICONS = {
-  coffee: "☕",
-  "non-coffee": "🥤",
-  tea: "🍵",
-  dessert: "🍰",
-};
-
 let activeCategoryId = "all";
 
 function renderCategoryTabs() {
@@ -41,16 +34,36 @@ function renderMenuGrid() {
   }
 
   gridEl.innerHTML = menus
-    .map(
-      (menu) => `
+    .map((menu) => {
+      const category = getCategoryById(menu.categoryId);
+      const badgesHtml = `
+        ${menu.isPopular ? `<span class="badge badge-popular">인기</span>` : ""}
+        ${menu.isNew ? `<span class="badge badge-new">신규</span>` : ""}
+      `;
+
+      return `
         <article class="menu-card glass" data-menu-id="${menu.id}">
-          ${menu.isNew ? `<span class="badge">NEW</span>` : ""}
-          <div class="thumb">${CATEGORY_ICONS[menu.categoryId] || "☕"}</div>
-          <p class="name">${menu.name}</p>
-          <p class="price">${formatPrice(menu.price)}</p>
+          <div class="menu-image-container">
+            <img
+              src="${menu.image}"
+              alt="${menu.name}"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1541167760496-1628856ab772?w=500&auto=format&fit=crop&q=60'"
+            >
+            <div class="menu-badges">${badgesHtml}</div>
+            <span class="menu-category-tag">${category ? category.name : ""}</span>
+          </div>
+          <div class="menu-info">
+            <p class="name">${menu.name}</p>
+            <p class="desc">${menu.description}</p>
+            <div class="menu-meta">
+              <span class="price">${formatPrice(menu.price)}</span>
+              ${menu.hasTemperatureOption ? `<span class="option-tag">ICE/HOT</span>` : ""}
+            </div>
+          </div>
         </article>
-      `
-    )
+      `;
+    })
     .join("");
 
   gridEl.querySelectorAll(".menu-card").forEach((card) => {
