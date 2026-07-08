@@ -1,0 +1,25 @@
+{
+  "name": "new-cafe-app",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "serve -l 3151"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidLee534/new-cafe-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DavidLee534/new-cafe-app/issues"
+  },
+  "homepage": "https://github.com/DavidLee534/new-cafe-app#readme",
+  "dependencies": {
+    "serve": "^14.2.6"
+  }
+}
