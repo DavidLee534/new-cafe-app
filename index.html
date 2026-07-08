@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Haute Café - 테스트 배포 포털</title>
+  <meta name="description" content="카페 앱 테스트 배포용 메인 페이지입니다. 고객 주문, 장바구니 및 관리자 기능을 테스트할 수 있습니다." />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <!-- Global Header -->
+  <header class="app-header glass">
+    <div class="header-logo">
+      <span class="logo-emoji">☕</span>
+      <span class="logo-text">Haute Café</span>
+    </div>
+    <a href="basket/list.html" class="icon-btn header-cart" aria-label="장바구니">
+      <span class="cart-icon">🛒</span>
+      <span class="cart-badge" id="cart-badge" data-count="0" style="display: none;">0</span>
+    </a>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section glass">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-badge">Test Deployment Portal</span>
+      <h1 class="hero-title">따뜻한 커피 한 잔의 여유,<br>오뜨 카페에 오신 것을 환영합니다.</h1>
+      <p class="hero-subtitle">이곳은 카페 서비스의 모든 기능을 한눈에 확인하고 테스트할 수 있는 배포 전용 홈입니다.</p>
+      <div class="hero-actions">
+        <a href="menus/list.html" class="btn btn-primary">
+          <span>☕</span> 주문하러 가기
+        </a>
+        <a href="admin/menus/list.html" class="btn btn-outline">
+          <span>📋</span> 관리자 모드
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Grid -->
+  <main class="portal-grid">
+    <!-- Customer Section -->
+    <section class="portal-section glass">
+      <div class="section-header">
+        <span class="section-emoji">👤</span>
+        <h2>고객 서비스 모드 (Client)</h2>
+      </div>
+      <p class="section-desc">가상의 고객 관점에서 메뉴를 탐색하고, 장바구니에 담아 주문을 진행합니다.</p>
+      
+      <div class="card-links">
+        <a href="menus/list.html" class="portal-card">
+          <div class="card-icon">☕</div>
+          <div class="card-info">
+            <h3>메뉴 목록</h3>
+            <p>음료 및 디저트 카테고리별 상품 탐색 및 디테일 옵션 선택</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+        
+        <a href="basket/list.html" class="portal-card">
+          <div class="card-icon">🛒</div>
+          <div class="card-info">
+            <h3>장바구니</h3>
+            <p>선택한 메뉴 수량 변경 및 최종 가상 결제와 주문 완료 처리</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+        <a href="orders/list.html" class="portal-card">
+          <div class="card-icon">🛍️</div>
+          <div class="card-info">
+            <h3>주문 내역</h3>
+            <p>이전의 주문 내역 정보 및 주문 상태(완료/취소) 목록 확인</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Admin Section -->
+    <section class="portal-section glass">
+      <div class="section-header">
+        <span class="section-emoji">🔴</span>
+        <h2>관리자 모드 (Admin)</h2>
+      </div>
+      <p class="section-desc">사장 및 점원 관점에서 메뉴 정보를 실시간으로 수정하고 제품 라인업을 관리합니다.</p>
+
+      <div class="card-links">
+        <a href="admin/menus/list.html" class="portal-card admin-card">
+          <div class="card-icon">📋</div>
+          <div class="card-info">
+            <h3>메뉴 목록 관리</h3>
+            <p>전체 상품의 리스트/그리드 확인 및 삭제, 수정 모달 링크</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+        <a href="admin/menus/create.html" class="portal-card admin-card">
+          <div class="card-icon">✨</div>
+          <div class="card-info">
+            <h3>새 메뉴 등록</h3>
+            <p>카테고리 분류, 가격 설정 및 신메뉴/인기메뉴 라벨링 지정</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Testing Panel -->
+  <section class="test-panel-section glass">
+    <div class="panel-header">
+      <span class="panel-emoji">⚙️</span>
+      <h2>테스트 상태 및 모의 데이터 관리</h2>
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-title">등록된 메뉴</span>
+        <span class="stat-value" id="stat-menus-count">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-title">누적 주문 건수</span>
+        <span class="stat-value" id="stat-orders-count">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-title">장바구니 담긴 개수</span>
+        <span class="stat-value" id="stat-cart-count">0</span>
+      </div>
+    </div>
+
+    <div class="panel-actions">
+      <button id="btn-reset-data" class="btn btn-warning">
+        <span>🔄</span> 데이터 초기화 (기본 모의 데이터로)
+      </button>
+      <button id="btn-add-mock-order" class="btn btn-secondary">
+        <span>➕</span> 임의 주문 생성 (테스트용 주문 1건 추가)
+      </button>
+      <button id="btn-clear-cart" class="btn btn-danger">
+        <span>🗑️</span> 장바구니 비우기
+      </button>
+    </div>
+    
+    <div class="storage-notice">
+      <p>💡 <strong>안내:</strong> 본 서비스는 <code>LocalStorage</code>를 사용하여 데이터를 브라우저에 임시 저장합니다. 기기나 브라우저를 변경하지 않는 한 데이터가 유지됩니다.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>&copy; 2026 Haute Café. Designed for Lion Cafe Application Test Deployment.</p>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast glass" style="display: none;"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
