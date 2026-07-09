@@ -185,6 +185,11 @@ function getOrders() {
   );
 }
 
+function getOrderById(orderId) {
+  const orders = getStoredOrdersRaw();
+  return orders.find((order) => order.id === Number(orderId)) || null;
+}
+
 function getOrderTotal(order) {
   return order.items.reduce(
     (total, item) => total + item.price * item.quantity,
