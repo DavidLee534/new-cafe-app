@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>카페 앱</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <header class="home-header glass">
+    <div class="brand">
+      <span class="brand-emoji">☕</span>
+      <span class="brand-title">Cafe</span>
+    </div>
+    <a href="basket/list.html" class="icon-btn header-cart" aria-label="장바구니">
+      <span class="cart-icon">🛒</span>
+      <span class="cart-badge" id="cart-badge" data-count="0">0</span>
+    </a>
+  </header>
+
+  <main class="home-body">
+    <section class="hero glass">
+      <p class="hero-eyebrow">오늘도 좋은 하루</p>
+      <h1 class="hero-title">향긋한 커피 한 잔,<br />지금 주문해보세요</h1>
+      <a href="menus/list.html" class="btn-cta">메뉴 보러가기 →</a>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">카테고리</h2>
+      <div class="category-grid" id="category-grid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-title">인기 메뉴</h2>
+        <a href="menus/list.html" class="section-link">전체보기 →</a>
+      </div>
+      <div class="menu-grid" id="popular-grid"></div>
+    </section>
+
+    <section class="quick-links">
+      <a href="menus/list.html" class="quick-link glass">
+        <span class="quick-link-icon">☕</span>
+        <span>메뉴</span>
+      </a>
+      <a href="basket/list.html" class="quick-link glass">
+        <span class="quick-link-icon">🛒</span>
+        <span>장바구니</span>
+      </a>
+      <a href="orders/list.html" class="quick-link glass">
+        <span class="quick-link-icon">🧾</span>
+        <span>주문내역</span>
+      </a>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

@@ -1,4 +1,8 @@
-let activeCategoryId = "all";
+const params = new URLSearchParams(location.search);
+const requestedCategoryId = params.get("category");
+let activeCategoryId = CATEGORIES.some((category) => category.id === requestedCategoryId)
+  ? requestedCategoryId
+  : "all";
 
 function renderCategoryNav(containerId, tabClass) {
   const containerEl = document.getElementById(containerId);
