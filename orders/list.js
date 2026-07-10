@@ -24,7 +24,7 @@ function renderOrderList() {
       const isCancelled = order.status === "주문취소";
 
       return `
-        <article class="order-card glass">
+        <article class="order-card glass" data-order-id="${order.id}">
           <div class="order-card-header">
             <span class="order-date">${formatDate(order.orderDate)}</span>
             <span class="status-badge ${isCancelled ? "cancelled" : ""}">${order.status}</span>
@@ -39,6 +39,12 @@ function renderOrderList() {
       `;
     })
     .join("");
+
+  listEl.querySelectorAll(".order-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      window.location.href = `detail.html?id=${card.dataset.orderId}`;
+    });
+  });
 }
 
 renderOrderList();
